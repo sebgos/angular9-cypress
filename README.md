@@ -24,11 +24,7 @@ ng serve
 and navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 ## Running the E2E tests with Cypress
 
-This project has replaced Protractor with Cypress E2E automated tests. You have various ways of running E2E automated tests. You can run `ng e2e` or `npm run e2e` to build and open Cypress dashboard from which you can execute the end-to-end tests via [Cypress](http://www.protractortest.org/).
-
- `cypress open` or `cypress run` 
-
-You can also run `ng e2e:ci` which will run the app and execute all cypress tests automatically.
+This project has replaced Protractor with Cypress E2E automated tests. You have various ways of running E2E automated tests. 
 
 ### Regular way
 
