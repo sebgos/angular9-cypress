@@ -1,27 +1,100 @@
-# Angular9Cypress
+# Angular 9 + Cypress + CircleCI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
+[Angular 9](https://www.angular.io) and [Cypress.io](https://www.cypress.io) integration including basic e2e automated tests and CI with [CircleCI](https://circleci.com).
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## Code scaffolding
+### Installing
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+A step by step series of examples that tell you how to get a development env running
 
-## Build
+Install the project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+npm i
+```
 
-## Running unit tests
+and run the regular Angular 9 app
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+ng serve
+```
+and navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Running the E2E tests with Cypress
 
-## Running end-to-end tests
+This project has replaced Protractor with Cypress E2E automated tests. You have various ways of running E2E automated tests. You can run `ng e2e` or `npm run e2e` to build and open Cypress dashboard from which you can execute the end-to-end tests via [Cypress](http://www.protractortest.org/).
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+ `cypress open` or `cypress run` 
 
-## Further help
+You can also run `ng e2e:ci` which will run the app and execute all cypress tests automatically.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Regular way
+
+As we replaced Protractor with Cypress E2E you can run it with
+
+```
+ng e2e
+```
+or
+```
+npm run e2e
+```
+to build an app and open Cypress dashboard from which you can execute the end-to-end tests.
+### Cypress way
+
+You can use regular Cypress commands like
+
+```
+cypress open
+```
+or
+```
+cypress run
+```
+### Magic way
+
+You can use custom script to run app and test automatically.
+
+```
+npm run e2e:ci
+```
+## Deployment
+CircleCI provides built-in integration with GitHub repository. You need to log in using your GitHub account and pickup a repo for a new project. Then you need to add config.yml file to your project CircleCI setup.
+
+```YAML
+version: 2.1
+orbs:
+  # This Orb includes the following:
+  # - checkout current repository
+  # - npm install with caching
+  # - start the server
+  # - wait for the server to respond
+  # - run Cypress tests
+  # - store videos and screenshots as artifacts on CircleCI
+  cypress: cypress-io/cypress@1
+workflows:
+  build:
+    jobs:
+      - cypress/run:
+          start: npm start
+          wait-on: 'http://localhost:4200'
+          store_artifacts: true
+```
+
+## Built With
+
+* [Angular 9](https://www.angular.io) - with ng-cli v9 support
+* [Cypress.io](https://www.cypress.io) - JavaScript E2E test automation framework
+* [CircleCI](https://circleci.com) - Continous Integration tool
+
+## Authors
+
+* **Sebastian Gos** - *Initial work* 
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
